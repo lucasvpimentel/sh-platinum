@@ -76,4 +76,14 @@ t('puzzles: ids únicos, fontes válidas, dificuldade muda a resposta', () => {
   assert.equal(solutionFor(PUZZLES.find((p) => p.id === 'scales'), 'light').kind, 'steps');
 });
 
+import { MEMOS, PHOTOS, GLIMPSES, CATEGORIES, colKey } from '../assets/js/data/collectibles.js';
+t('coletáveis: 68 memos, 26 fotos, 26 vislumbres, chaves únicas', () => {
+  assert.equal(MEMOS.length, 68);
+  assert.equal(PHOTOS.length, 26);
+  assert.equal(GLIMPSES.length, 26);
+  const keys = Object.entries({ memos: 68, fotos: 26, vislumbres: 26 }).flatMap(([c, tot]) => Array.from({ length: tot }, (_, i) => colKey(c, i + 1)));
+  assert.equal(new Set(keys).size, 120);
+  Object.values(CATEGORIES).forEach((c) => assert.ok(SOURCES[c.src]));
+});
+
 console.log(`\n${n} testes passaram`);

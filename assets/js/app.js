@@ -4,6 +4,7 @@ import { esc } from './util.js';
 import * as route from './views/route.js';
 import * as endings from './views/endings.js';
 import * as puzzles from './views/puzzles.js';
+import * as collectibles from './views/collectibles.js';
 
 const store = createStore();
 
@@ -12,7 +13,7 @@ const VIEWS = [
   { id: 'rota', label: 'Rota', view: route },
   { id: 'finais', label: 'Finais', view: endings },
   { id: 'puzzles', label: 'Puzzles', view: puzzles },
-  { id: 'coletaveis', label: 'Coletáveis' },
+  { id: 'coletaveis', label: 'Coletáveis', view: collectibles },
   { id: 'atlas', label: 'Atlas' },
   { id: 'bestiario', label: 'Bestiário' },
   { id: 'segredos', label: 'Segredos' },
@@ -43,7 +44,7 @@ function renderView() {
   const item = VIEWS.find((v) => v.id === currentId());
   // Preserva o foco entre re-renderizações (acessibilidade por teclado).
   const a = document.activeElement;
-  const focusSel = a && main.contains(a) ? (a.dataset.id ? `[data-id="${CSS.escape(a.dataset.id)}"]` : a.dataset.end ? `[data-end="${CSS.escape(a.dataset.end)}"]` : a.dataset.pt ? `[data-pt="${a.dataset.pt}"]` : null) : null;
+  const focusSel = a && main.contains(a) ? ['id', 'end', 'col', 'pt'].map((k) => (a.dataset[k] ? `[data-${k}="${CSS.escape(a.dataset[k])}"]` : null)).find(Boolean) || null : null;
   if (item.view) item.view.render(main, { store });
   else main.innerHTML = `<h2>${esc(item.label)}</h2><div class="card"><p class="muted">Esta seção será liberada em uma fase posterior.</p></div>`;
   if (focusSel) main.querySelector(focusSel)?.focus();
