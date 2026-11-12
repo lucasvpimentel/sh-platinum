@@ -55,4 +55,12 @@ t('sanitize: lixo vira padrão e valores válidos persistem', () => {
   assert.equal(s.ui.pt, null);
 });
 
+import { ENDINGS } from '../assets/js/data/endings.js';
+t('8 finais, 3 clássicos + 5 NG+, fontes válidas', () => {
+  assert.equal(ENDINGS.length, 8);
+  assert.equal(ENDINGS.filter((e) => e.type === 'classic').length, 3);
+  assert.equal(new Set(ENDINGS.map((e) => e.id)).size, 8);
+  ENDINGS.forEach((e) => { assert.ok(SOURCES[e.src]); assert.ok(e.do.length > 0); });
+});
+
 console.log(`\n${n} testes passaram`);

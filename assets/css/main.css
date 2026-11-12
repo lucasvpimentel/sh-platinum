@@ -110,4 +110,11 @@ button, .btn { font: 500 13px var(--f-ui); background: #0f1114; color: var(--tit
 button:hover, .btn:hover { border-color: var(--green-hi); } button.danger:hover { border-color: var(--ember); color: #e9a29c; }
 .inline { margin-right: 8px; }
 
+h4 { font: 600 13px var(--f-head); letter-spacing: .08em; text-transform: uppercase; color: var(--ember); margin: 12px 0 4px; }
+.sec { margin: 22px 0 10px; color: var(--light); border-bottom: 1px solid var(--edge); padding-bottom: 4px; }
+.end-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; } .end-head h3 { margin: 0 6px 0 0; }
+.ending.locked { opacity: .75; }
+.checks, .avoid { list-style: none; padding: 0; margin: 6px 0; } .checks li { margin: 6px 0; }
+.avoid li { padding-left: 16px; position: relative; font-size: 14px; } .avoid li::before { content: '\2715'; position: absolute; left: 0; color: var(--ember); font-size: 11px; top: 2px; }
+.note ul { margin: 6px 0 0; padding-left: 18px; }
 @media (max-width: 520px) { .config { grid-template-columns: 1fr; } .step p, .step .tags, .step .alert { margin-left: 0; } }

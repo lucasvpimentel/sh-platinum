@@ -2,13 +2,14 @@ import { createStore } from './state.js';
 import { CONFIG_FIELDS } from './config.js';
 import { esc } from './util.js';
 import * as route from './views/route.js';
+import * as endings from './views/endings.js';
 
 const store = createStore();
 
 // Registro de abas. Fases seguintes adicionam views aqui.
 const VIEWS = [
   { id: 'rota', label: 'Rota', view: route },
-  { id: 'finais', label: 'Finais' },
+  { id: 'finais', label: 'Finais', view: endings },
   { id: 'puzzles', label: 'Puzzles' },
   { id: 'coletaveis', label: 'Coletáveis' },
   { id: 'atlas', label: 'Atlas' },
@@ -41,7 +42,7 @@ function renderView() {
   const item = VIEWS.find((v) => v.id === currentId());
   // Preserva o foco entre re-renderizações (acessibilidade por teclado).
   const a = document.activeElement;
-  const focusSel = a && main.contains(a) ? (a.dataset.id ? `[data-id="${CSS.escape(a.dataset.id)}"]` : a.dataset.pt ? `[data-pt="${a.dataset.pt}"]` : null) : null;
+  const focusSel = a && main.contains(a) ? (a.dataset.id ? `[data-id="${CSS.escape(a.dataset.id)}"]` : a.dataset.end ? `[data-end="${CSS.escape(a.dataset.end)}"]` : a.dataset.pt ? `[data-pt="${a.dataset.pt}"]` : null) : null;
   if (item.view) item.view.render(main, { store });
   else main.innerHTML = `<h2>${esc(item.label)}</h2><div class="card"><p class="muted">Esta seção será liberada em uma fase posterior.</p></div>`;
   if (focusSel) main.querySelector(focusSel)?.focus();
