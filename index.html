@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SH2 Remake: Guia de Platina</title>
+  <meta name="description" content="Guia de platina, finais, puzzles, coletáveis e mapas de Silent Hill 2 Remake (2024). Funciona offline no navegador.">
+  <meta name="color-scheme" content="dark">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+  <div class="grainlayer" aria-hidden="true"></div>
+  <a class="skip" href="#view">Pular para o conteúdo</a>
+  <header class="top">
+    <h1>Silent Hill 2 <span>Remake</span></h1>
+    <p class="sub">Guia definitivo de platina · fan made, sem fins comerciais</p>
+    <details class="runcfg" open>
+      <summary>Parâmetros da run</summary>
+      <div id="config" class="config"></div>
+    </details>
+    <nav id="nav" class="nav" aria-label="Seções"></nav>
+  </header>
+  <main id="view" tabindex="-1"></main>
+  <footer class="foot">
+    <label class="inline"><input type="checkbox" id="grain"> Granulação de filme</label>
+    <button id="export" type="button">Exportar progresso</button>
+    <label class="btn">Importar progresso<input id="import" type="file" accept="application/json" hidden></label>
+    <button id="reset" type="button" class="danger">Apagar tudo</button>
+    <p id="status" role="status" class="muted"></p>
+    <p class="muted">Projeto de fã, sem vínculo com Konami ou Bloober Team. Os dados são resumos próprios com links para as fontes. Todo o progresso fica só no seu navegador.</p>
+  </footer>
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>
