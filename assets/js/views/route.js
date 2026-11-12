@@ -32,7 +32,7 @@ export function render(el, { store }) {
           <div class="tags">${step.tags.filter((t) => TAG_LABEL[t]).map((t) => `<span class="tag ${t}">${TAG_LABEL[t]}</span>`).join('')}${locked ? '<span class="tag ngplus">Bloqueado: NG</span>' : ''}</div>
           <p>${esc(step.d)}</p>
           ${warnings.map((w) => `<div class="alert static ${w.kind}">${esc(w.text)}</div>`).join('')}
-          <p class="meta">${srcA(step.src)}${step.link ? ` · <a href="${esc(step.link)}">Abrir aba relacionada</a>` : ''}</p>
+          <p class="meta">${srcA(step.src)}${step.link ? ` · <a href="${esc(step.link)}">Abrir aba relacionada</a>` : ''}${step.map ? ` · <a href="#atlas/${esc(step.map)}">Abrir mapa</a>` : ''}</p>
         </li>`).join('')}
     </ol>`;
 

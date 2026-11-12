@@ -86,4 +86,22 @@ t('coletáveis: 68 memos, 26 fotos, 26 vislumbres, chaves únicas', () => {
   Object.values(CATEGORIES).forEach((c) => assert.ok(SOURCES[c.src]));
 });
 
+import { AREAS, findArea } from '../assets/js/data/atlas.js';
+import { MONSTERS, BOSSES, WEAPONS } from '../assets/js/data/bestiary.js';
+import { EGGS, DIFFS } from '../assets/js/data/extras.js';
+t('atlas: áreas únicas, arquivos únicos, links da rota apontam para áreas reais', () => {
+  assert.equal(new Set(AREAS.map((a) => a.id)).size, AREAS.length);
+  const files = AREAS.flatMap((a) => a.maps.map((m) => m.file));
+  assert.equal(new Set(files).size, files.length);
+  all.filter((s) => s.map).forEach((s) => assert.ok(findArea(s.map), s.id));
+  AREAS.forEach((a) => assert.ok(a.maps.length > 0));
+});
+t('bestiário e extras: dados presentes e fontes válidas', () => {
+  assert.equal(MONSTERS.length, 5);
+  assert.equal(BOSSES.length, 6);
+  assert.equal(WEAPONS.filter((w) => w.melee).length, 3);
+  EGGS.forEach((e) => { assert.ok(['ok', 'rep', 'unv'].includes(e.status)); if (e.src) assert.ok(SOURCES[e.src]); });
+  DIFFS.forEach((d) => { if (d.src) assert.ok(SOURCES[d.src]); });
+});
+
 console.log(`\n${n} testes passaram`);

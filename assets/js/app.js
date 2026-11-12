@@ -5,6 +5,9 @@ import * as route from './views/route.js';
 import * as endings from './views/endings.js';
 import * as puzzles from './views/puzzles.js';
 import * as collectibles from './views/collectibles.js';
+import * as atlas from './views/atlas.js';
+import * as bestiary from './views/bestiary.js';
+import { eggs, diffs, fontes } from './views/text.js';
 
 const store = createStore();
 
@@ -14,15 +17,17 @@ const VIEWS = [
   { id: 'finais', label: 'Finais', view: endings },
   { id: 'puzzles', label: 'Puzzles', view: puzzles },
   { id: 'coletaveis', label: 'Coletáveis', view: collectibles },
-  { id: 'atlas', label: 'Atlas' },
-  { id: 'bestiario', label: 'Bestiário' },
-  { id: 'segredos', label: 'Segredos' },
-  { id: 'diferencas', label: 'Original vs Remake' },
-  { id: 'fontes', label: 'Fontes' }
+  { id: 'atlas', label: 'Atlas', view: atlas },
+  { id: 'bestiario', label: 'Bestiário', view: bestiary },
+  { id: 'segredos', label: 'Segredos', view: eggs },
+  { id: 'diferencas', label: 'Original vs Remake', view: diffs },
+  { id: 'fontes', label: 'Fontes', view: fontes }
 ];
 
 const $ = (sel) => document.querySelector(sel);
-const currentId = () => (VIEWS.find((v) => v.id === location.hash.slice(1)) || VIEWS[0]).id;
+// Hash: #<aba> ou #<aba>/<parâmetro> (ex.: #atlas/wood-side).
+const hashParts = () => location.hash.slice(1).split('/');
+const currentId = () => (VIEWS.find((v) => v.id === hashParts()[0]) || VIEWS[0]).id;
 
 function renderNav() {
   const id = currentId();
@@ -45,7 +50,7 @@ function renderView() {
   // Preserva o foco entre re-renderizações (acessibilidade por teclado).
   const a = document.activeElement;
   const focusSel = a && main.contains(a) ? ['id', 'end', 'col', 'pt'].map((k) => (a.dataset[k] ? `[data-${k}="${CSS.escape(a.dataset[k])}"]` : null)).find(Boolean) || null : null;
-  if (item.view) item.view.render(main, { store });
+  if (item.view) item.view.render(main, { store, param: hashParts()[1] });
   else main.innerHTML = `<h2>${esc(item.label)}</h2><div class="card"><p class="muted">Esta seção será liberada em uma fase posterior.</p></div>`;
   if (focusSel) main.querySelector(focusSel)?.focus();
 }
