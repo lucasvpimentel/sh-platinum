@@ -3,6 +3,7 @@ import { CONFIG_FIELDS } from './config.js';
 import { esc } from './util.js';
 import * as route from './views/route.js';
 import * as endings from './views/endings.js';
+import * as puzzles from './views/puzzles.js';
 
 const store = createStore();
 
@@ -10,7 +11,7 @@ const store = createStore();
 const VIEWS = [
   { id: 'rota', label: 'Rota', view: route },
   { id: 'finais', label: 'Finais', view: endings },
-  { id: 'puzzles', label: 'Puzzles' },
+  { id: 'puzzles', label: 'Puzzles', view: puzzles },
   { id: 'coletaveis', label: 'Coletáveis' },
   { id: 'atlas', label: 'Atlas' },
   { id: 'bestiario', label: 'Bestiário' },

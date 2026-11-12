@@ -63,4 +63,17 @@ t('8 finais, 3 clássicos + 5 NG+, fontes válidas', () => {
   ENDINGS.forEach((e) => { assert.ok(SOURCES[e.src]); assert.ok(e.do.length > 0); });
 });
 
+import { PUZZLES, solutionFor } from '../assets/js/data/puzzles.js';
+t('puzzles: ids únicos, fontes válidas, dificuldade muda a resposta', () => {
+  assert.equal(new Set(PUZZLES.map((p) => p.id)).size, PUZZLES.length);
+  PUZZLES.forEach((p) => p.srcs.forEach((k) => assert.ok(SOURCES[k], p.id)));
+  const grand = PUZZLES.find((p) => p.id === 'grand');
+  assert.equal(solutionFor(grand, 'light').text, '4442');
+  assert.equal(solutionFor(grand, 'hard').text, '4446');
+  const music = PUZZLES.find((p) => p.id === 'musicbox');
+  assert.equal(solutionFor(music, 'hard').kind, 'missing');   // sem dado: não inventa
+  assert.equal(solutionFor(PUZZLES.find((p) => p.id === 'chained'), 'hard').kind, 'any');
+  assert.equal(solutionFor(PUZZLES.find((p) => p.id === 'scales'), 'light').kind, 'steps');
+});
+
 console.log(`\n${n} testes passaram`);
